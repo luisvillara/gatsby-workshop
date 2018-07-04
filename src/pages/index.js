@@ -4,15 +4,37 @@ import Link from 'gatsby-link'
 import VideoBox from '../components/VideoBox'
 import styles from '../styles/index.module.sass'
 
-const IndexPage = () => (
+const IndexPage = ({ data: { allMarkdownRemark } }) => (
   <div className={styles.container}>
-    <div className={styles.boxContainer}>
-      <VideoBox title="Fake Happy" image="https://image.ibb.co/kn8gsJ/fake_happy.jpg" color="#FAF000" />
-    </div>
-    <div className={styles.boxContainer}>
-      <VideoBox title="Fake Happy" image="https://image.ibb.co/kn8gsJ/fake_happy.jpg" color="#FAF000" />
-    </div>
+    {allMarkdownRemark.edges.map((video, index) => (
+      <div key={`video_${index}`} className={styles.boxContainer}>
+        <VideoBox
+          title={video.node.frontmatter.title}
+          image={video.node.frontmatter.image}
+          color={video.node.frontmatter.color}
+          link={video.node.frontmatter.path}
+        />
+      </div>
+    ))}
   </div>
 )
 
 export default IndexPage
+
+export const query = graphql`
+  query GetIndexData {
+    allMarkdownRemark {
+      edges {
+        node {
+          frontmatter {
+            title
+            path
+            color
+            image
+          }
+          html
+        }
+      }
+    }
+  }
+`
