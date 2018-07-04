@@ -1,12 +1,17 @@
 import React from 'react'
 import Link from 'gatsby-link'
 
+import VideoBox from '../components/VideoBox'
+import styles from '../styles/index.module.sass'
+
 const IndexPage = () => (
-  <div>
-    <h1>Hi people</h1>
-    <p>Welcome to your new Gatsby site.</p>
-    <p>Now go build something great.</p>
-    <Link to="/page-2/">Go to page 2</Link>
+  <div className={styles.container}>
+    <div className={styles.boxContainer}>
+      <VideoBox title="Fake Happy" image="https://image.ibb.co/kn8gsJ/fake_happy.jpg" color="#FAF000" />
+    </div>
+    <div className={styles.boxContainer}>
+      <VideoBox title="Fake Happy" image="https://image.ibb.co/kn8gsJ/fake_happy.jpg" color="#FAF000" />
+    </div>
   </div>
 )
 
